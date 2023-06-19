@@ -20,8 +20,8 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 @EqualsAndHashCode
 public class Address {
 
@@ -63,6 +63,5 @@ public class Address {
         this.street = street;
         this.client = client;
     }
-
     
 }
