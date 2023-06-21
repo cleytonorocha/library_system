@@ -2,9 +2,11 @@ package com.github.cleyto_orocha.library_system.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,7 +53,17 @@ public class ProductController {
         return productService.findAllBooks();
     }
 
-    // Papper Controller
+    @DeleteMapping("/books/{id}")
+    public void deleteBook(@PathVariable Long id) {
+        productService.deleteBook(id);
+    }
+
+    @PutMapping("/books/{id}")
+    public Book updateBook(@PathVariable @Valid Long id, @RequestBody Book book) {
+        return productService.updateBook(book, id);
+    }
+
+    // Paper Controller
 
     @GetMapping("/papers/{id}")
     public Product findPaperById(@PathVariable Long id) {
@@ -66,6 +78,16 @@ public class ProductController {
     @PostMapping("/papers")
     public Paper includePaper(@RequestBody @Valid Paper paper) {
         return productService.includePaper(paper);
+    }
+
+    @DeleteMapping("/papers/{id}")
+    public void deletePaper(@PathVariable Long id) {
+        productService.deletePaper(id);
+    }
+
+    @PutMapping("/{id}")
+    public Paper updateBook(@PathVariable @Valid Long id, @RequestBody Paper paper) {
+        return productService.updatePaper(paper, id);
     }
 
 }

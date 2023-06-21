@@ -46,6 +46,23 @@ public class ProductService {
         return bookRepository.save(book);
     }
 
+    public void deleteBook(Long id) {
+        bookRepository.findById(id)
+                .map(m -> {
+                    bookRepository.delete(m);
+                    return Void.TYPE;
+                }).orElseThrow(() -> new IdError());
+    }
+
+    public Book updateBook(Book book, Long id) {
+        return bookRepository.findById(id)
+                .map(m -> {
+                    book.setIdProduct(m.getIdProduct());
+                    bookRepository.save(book);
+                    return book;
+                }).orElseThrow(() -> new IdError());
+            }
+
     // Paper Service
 
     public Paper findPaperById(Long id) {
@@ -58,5 +75,22 @@ public class ProductService {
 
     public Paper includePaper(Paper Paper) {
         return paperRepository.save(Paper);
+    }
+
+    public void deletePaper(Long id) {
+        paperRepository.findById(id)
+                .map(m -> {
+                    paperRepository.delete(m);
+                    return Void.TYPE;
+                }).orElseThrow(() -> new IdError());
+    }
+
+    public Paper updatePaper(Paper paper, Long id) {
+        return paperRepository.findById(id)
+                .map(m -> {
+                    paper.setIdProduct(m.getIdProduct());
+                    paperRepository.save(paper);
+                    return paper;
+                }).orElseThrow(() -> new IdError());
     }
 }
