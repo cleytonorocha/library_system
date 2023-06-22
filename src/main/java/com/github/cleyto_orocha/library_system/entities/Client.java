@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.cleyto_orocha.library_system.entities.nxn.Client_Product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

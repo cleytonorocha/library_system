@@ -36,7 +36,6 @@ public class Book extends Product {
     private String publisher;
 
     @Past
-    @Column(length = 100)
     @NotNull(message = "The data of book's required")
     private Instant data;
 

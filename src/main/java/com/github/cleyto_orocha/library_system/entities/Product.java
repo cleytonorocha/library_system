@@ -3,6 +3,8 @@ package com.github.cleyto_orocha.library_system.entities;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.github.cleyto_orocha.library_system.entities.nxn.Client_Product;
+import com.github.cleyto_orocha.library_system.entities.nxn.Product_Acquisition;
 import com.github.cleyto_orocha.library_system.enums.TypeProduct;
 
 import jakarta.persistence.Column;
@@ -51,6 +53,9 @@ public abstract class Product {
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Client_Product> product;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<Product_Acquisition> operations;
 
     public void setType(TypeProduct type) {
         this.type = type.getCod();

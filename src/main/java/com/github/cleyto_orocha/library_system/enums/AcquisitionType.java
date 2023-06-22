@@ -6,17 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter @AllArgsConstructor
-public enum TypeTransaction {
+public enum AcquisitionType {
     PURCHASE(1, "Purchase"),
     LOAN(2, "Loan");
 
+    
     private final Integer cod;
     private final String description;
 
-    public static TypeTransaction toEnum(Integer cod){
+    public static AcquisitionType toEnum(Integer cod){
        if(cod == null) return null;
 
-        for (TypeTransaction interable : TypeTransaction.values()) {
+        for (AcquisitionType interable : AcquisitionType.values()) {
             if (cod.equals(interable.getCod())) return interable;
         }
 
