@@ -47,4 +47,5 @@ public class Book extends Product {
 
     @NotNull(message = "The state of book's required")
     private Boolean borrowed = false;
+
 }

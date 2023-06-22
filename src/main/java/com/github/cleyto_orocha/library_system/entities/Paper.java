@@ -24,4 +24,5 @@ public class Paper extends Product {
     @Column(length = 10)
     @NotNull(message = "The number of sheets cannot be null")
     private Integer leaves;
+
 }

@@ -57,7 +57,7 @@ public class ProductService {
     public Book updateBook(Book book, Long id) {
         return bookRepository.findById(id)
                 .map(m -> {
-                    book.setIdProduct(m.getIdProduct());
+                    book.setId(m.getId());
                     bookRepository.save(book);
                     return book;
                 }).orElseThrow(() -> new IdError());
@@ -88,7 +88,7 @@ public class ProductService {
     public Paper updatePaper(Paper paper, Long id) {
         return paperRepository.findById(id)
                 .map(m -> {
-                    paper.setIdProduct(m.getIdProduct());
+                    paper.setId(m.getId());
                     paperRepository.save(paper);
                     return paper;
                 }).orElseThrow(() -> new IdError());

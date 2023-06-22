@@ -4,10 +4,10 @@ import com.github.cleyto_orocha.library_system.enums.UF;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -26,7 +26,6 @@ import lombok.ToString;
 public class Address {
 
     @Id
-    @Column(name = "idAddress")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -50,8 +49,7 @@ public class Address {
     @NotEmpty(message = "The street connot be empty")
     private String street;
 
-    @OneToOne
-    @JoinColumn(name = "id_client")
+    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
     private Client client;
 
     public Address(Long id, Integer cod, String city, String neighborhood, String street,
