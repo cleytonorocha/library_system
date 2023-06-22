@@ -1,6 +1,7 @@
 package com.github.cleyto_orocha.library_system.entities;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -28,13 +29,26 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor @NoArgsConstructor
-@ToString @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "id_endereco")
+    private Address address;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    private Set<Client_Product> whishList;
+
+    @OneToMany
+    private List<Acquisition> acquitionList;
 
     @Column(length = 200)
     @NotNull(message = "The name is required")
@@ -45,13 +59,5 @@ public class Client {
     @NotNull(message = "The CPF is required")
     @NotEmpty(message = "The CPF cannot be empty")
     private String CPF;
-
-    @OneToOne
-    @JoinColumn(name = "id_endereco")
-    private Address address;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
-    private List<Client_Product> whishList;
 
 }
