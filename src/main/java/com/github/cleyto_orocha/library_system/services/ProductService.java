@@ -32,6 +32,15 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    @Deprecated
+    public void deleteProduct(Long id) {
+        productRepository.findById(id)
+                .map(m -> {
+                    productRepository.delete(m);
+                    return Void.TYPE;
+                }).orElseThrow(() -> new IdError());
+    }
+
     // Book Service
 
     public Book findBookById(Long id) {
@@ -93,4 +102,6 @@ public class ProductService {
                     return paper;
                 }).orElseThrow(() -> new IdError());
     }
+
+    
 }

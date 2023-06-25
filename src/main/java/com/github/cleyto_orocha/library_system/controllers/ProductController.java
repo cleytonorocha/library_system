@@ -26,6 +26,8 @@ public class ProductController {
 
     private final ProductService productService;
 
+    // Product Controller
+
     @GetMapping("/{id}")
     public Product findProductById(@PathVariable Long id) {
         return productService.findProductById(id);
@@ -35,6 +37,11 @@ public class ProductController {
     public List<Product> findAllProduct() {
         return productService.findAllProducts();
     }
+
+    // @DeleteMapping("/{id}")
+    // public void deleteProduct(@PathVariable Long id) {
+    //     productService.deleteProduct(id);
+    // }
 
     // Books Controller
 
@@ -85,7 +92,7 @@ public class ProductController {
         productService.deletePaper(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/papers/{id}")
     public Paper updateBook(@PathVariable @Valid Long id, @RequestBody Paper paper) {
         return productService.updatePaper(paper, id);
     }

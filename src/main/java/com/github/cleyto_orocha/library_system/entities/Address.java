@@ -1,16 +1,19 @@
 package com.github.cleyto_orocha.library_system.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.cleyto_orocha.library_system.enums.UF;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +24,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 public class Address {
 
@@ -29,10 +34,8 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 2)
     @NotNull(message = "The state is required")
-    @NotEmpty(message = "The state connot be empty")
-    private UF state;
+    private Integer state;
 
     @Column(length = 100)
     @NotNull(message = "The city is required")
@@ -49,17 +52,17 @@ public class Address {
     @NotEmpty(message = "The street connot be empty")
     private String street;
 
-    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(name = "id_client")
     private Client client;
 
-    public Address(Long id, Integer cod, String city, String neighborhood, String street,
-            Client client) {
+    public Address(Long id, Integer cod, String city, String neighborhood, String street) {
         this.id = id;
-        this.state = UF.toEnum(cod);
+        this.state = UF.toEnum(cod).getCod();
         this.city = city;
         this.neighborhood = neighborhood;
         this.street = street;
-        this.client = client;
     }
     
 }

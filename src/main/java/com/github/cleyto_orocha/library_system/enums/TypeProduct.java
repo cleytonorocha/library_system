@@ -15,7 +15,7 @@ public enum TypeProduct {
 
     public static TypeProduct toEnum(Integer cod){
         if(cod == null) return null;
-
+                
         for (TypeProduct interable : TypeProduct.values()) {
             if (cod.equals(interable.getCod())) return interable;
         }
