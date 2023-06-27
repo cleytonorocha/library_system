@@ -3,6 +3,7 @@ package com.github.cleyto_orocha.library_system.controllers.dto;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.github.cleyto_orocha.library_system.entities.Product;
 import com.github.cleyto_orocha.library_system.entities.nxn.Client_Product;
 import com.github.cleyto_orocha.library_system.entities.nxn.Product_Acquisition;
 import com.github.cleyto_orocha.library_system.enums.TypeProduct;
@@ -22,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class ProductDTO {
+public abstract class ProductDTO extends Product{
 
     private Long id;
 
