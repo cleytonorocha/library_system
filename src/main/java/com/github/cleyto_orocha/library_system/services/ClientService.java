@@ -1,10 +1,11 @@
 package com.github.cleyto_orocha.library_system.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.github.cleyto_orocha.library_system.entities.Client;
+import com.github.cleyto_orocha.library_system.controllers.dto.ClientDTO;
 import com.github.cleyto_orocha.library_system.exception.IdError;
 import com.github.cleyto_orocha.library_system.repositories.ClientRepository;
 
@@ -16,17 +17,22 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
 
-    public Client findById(Long id) {
-        return clientRepository.findById(id)
-                .orElseThrow(() -> new IdError());
+    public ClientDTO findById(Long id) {
+        return ClientDTO.buildClientDTO(clientRepository.findById(id)
+                .orElseThrow(() -> new IdError()));
     }
 
-    public List<Client> listAll() {
-        return clientRepository.findAll();
+    public List<ClientDTO> listAll() {
+        return clientRepository.findAll()
+                .stream()
+                .map(m -> ClientDTO.buildClientDTO(m))
+                .collect(Collectors.toList());
     }
 
-    public Client include(Client client) {
-        return clientRepository.save(client);
+    public Long include(ClientDTO clientDTO) {
+        return clientRepository.save(
+                ClientDTO.buildClient(clientDTO))
+                .getId();
     }
 
     public void delete(Long id) {
@@ -37,12 +43,12 @@ public class ClientService {
                 }).orElseThrow(() -> new IdError());
     }
 
-    public Client update(Long id, Client client) {
+    public ClientDTO update(Long id, ClientDTO clientDTO) {
         return clientRepository.findById(id)
                 .map(f -> {
-                    client.setId(f.getId());
-                    clientRepository.save(client);
-                    return client;
+                    clientDTO.setId(f.getId());
+                    clientRepository.save(ClientDTO.buildClient(clientDTO));
+                    return clientDTO;
                 })
                 .orElseThrow(() -> new IdError());
     }

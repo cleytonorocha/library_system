@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.cleyto_orocha.library_system.controllers.dto.AddressDTO;
-import com.github.cleyto_orocha.library_system.entities.Address;
 import com.github.cleyto_orocha.library_system.services.AddressService;
 
 import jakarta.validation.Valid;
@@ -26,17 +25,17 @@ public class AddressController {
     private final AddressService addressService;
 
     @GetMapping("/{id}")
-    public Address findById(@PathVariable Long id) {
+    public AddressDTO findById(@PathVariable Long id) {
         return addressService.findById(id);
     }
 
     @GetMapping()
-    public List<Address> findAll(Address address) {
-        return addressService.findAll(address);
+    public List<AddressDTO> findAll() {
+        return addressService.findAll();
     }
 
     @PostMapping
-    public Address include(@RequestBody @Valid AddressDTO addressDTO) {
+    public Long include(@RequestBody @Valid AddressDTO addressDTO) {
         return addressService.include(addressDTO);
     }
 
@@ -46,7 +45,7 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
-    public Address update(@RequestBody AddressDTO addressDTO, @PathVariable @Valid Long id) {
+    public AddressDTO update(@RequestBody AddressDTO addressDTO, @PathVariable @Valid Long id) {
         return addressService.update(addressDTO, id);
     }
 
