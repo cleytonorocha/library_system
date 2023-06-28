@@ -1,5 +1,6 @@
 package com.github.cleyto_orocha.library_system.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.cleyto_orocha.library_system.enums.UF;
 
@@ -55,5 +56,5 @@ public class Address {
     @JsonIgnore
     @JoinColumn(name = "id_client")
     private Client client;
-    
+
 }

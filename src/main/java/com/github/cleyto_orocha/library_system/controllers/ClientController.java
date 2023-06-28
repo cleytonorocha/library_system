@@ -39,6 +39,7 @@ public class ClientController {
         return clientService.include(clientDTO);
     }
 
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         clientService.delete(id);

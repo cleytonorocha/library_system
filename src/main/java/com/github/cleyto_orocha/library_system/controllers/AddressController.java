@@ -39,7 +39,7 @@ public class AddressController {
         return addressService.include(addressDTO);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     public void delete(@PathVariable Long id) {
         addressService.delete(id);
     }
