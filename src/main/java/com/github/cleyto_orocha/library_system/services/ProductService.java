@@ -1,11 +1,12 @@
 package com.github.cleyto_orocha.library_system.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.github.cleyto_orocha.library_system.entities.Book;
-import com.github.cleyto_orocha.library_system.entities.Paper;
+import com.github.cleyto_orocha.library_system.controllers.dto.BookDTO;
+import com.github.cleyto_orocha.library_system.controllers.dto.PaperDTO;
 import com.github.cleyto_orocha.library_system.entities.Product;
 import com.github.cleyto_orocha.library_system.exception.IdError;
 import com.github.cleyto_orocha.library_system.repositories.BookRepository;
@@ -43,16 +44,23 @@ public class ProductService {
 
     // Book Service
 
-    public Book findBookById(Long id) {
-        return bookRepository.findById(id).orElseThrow(() -> new IdError());
+    public BookDTO findBookById(Long id) {
+        return BookDTO.buildBookDTO(bookRepository.findById(id)
+                .orElseThrow(() -> new IdError()));
     }
 
-    public List<Book> findAllBooks() {
-        return bookRepository.findAll();
+    public List<BookDTO> findAllBooks() {
+        return bookRepository.findAll()
+                .stream()
+                .map(m -> BookDTO.buildBookDTO(m))
+                .collect(Collectors.toList());
     }
 
-    public Book includeBook(Book book) {
-        return bookRepository.save(book);
+    public Long includeBook(BookDTO bookDTO) {
+        return bookRepository.save(
+                BookDTO.buildBook(bookDTO))
+                .getId();
+
     }
 
     public void deleteBook(Long id) {
@@ -63,27 +71,33 @@ public class ProductService {
                 }).orElseThrow(() -> new IdError());
     }
 
-    public Book updateBook(Book book, Long id) {
+    public BookDTO updateBook(BookDTO bookDTO, Long id) {
         return bookRepository.findById(id)
                 .map(m -> {
-                    book.setId(m.getId());
-                    bookRepository.save(book);
-                    return book;
+                    bookDTO.setId(m.getId());
+                    bookRepository.save(BookDTO.buildBook(bookDTO));
+                    return bookDTO;
                 }).orElseThrow(() -> new IdError());
-            }
+    }
 
     // Paper Service
 
-    public Paper findPaperById(Long id) {
-        return paperRepository.findById(id).orElseThrow(() -> new IdError());
+    public PaperDTO findPaperById(Long id) {
+        return PaperDTO.buildPaperDTO(paperRepository.findById(id)
+                .orElseThrow(() -> new IdError()));
     }
 
-    public List<Paper> findAllPaper() {
-        return paperRepository.findAll();
+    public List<PaperDTO> findAllPaper() {
+        return paperRepository.findAll()
+                .stream()
+                .map(m -> PaperDTO.buildPaperDTO(m))
+                .collect(Collectors.toList());
     }
 
-    public Paper includePaper(Paper Paper) {
-        return paperRepository.save(Paper);
+    public Long includePaper(PaperDTO paperDTO) {
+        return paperRepository.save(
+                PaperDTO.buildPaper(paperDTO))
+                .getId();
     }
 
     public void deletePaper(Long id) {
@@ -94,14 +108,13 @@ public class ProductService {
                 }).orElseThrow(() -> new IdError());
     }
 
-    public Paper updatePaper(Paper paper, Long id) {
+    public PaperDTO updatePaper(PaperDTO paperDTO, Long id) {
         return paperRepository.findById(id)
                 .map(m -> {
-                    paper.setId(m.getId());
-                    paperRepository.save(paper);
-                    return paper;
+                    paperDTO.setId(m.getId());
+                    paperRepository.save(PaperDTO.buildPaper(paperDTO));
+                    return paperDTO;
                 }).orElseThrow(() -> new IdError());
     }
 
-    
 }

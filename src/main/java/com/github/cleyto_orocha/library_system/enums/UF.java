@@ -6,33 +6,33 @@ import lombok.Getter;
 
 @Getter
 public enum UF {
-    AC(1, "Acre"),
-    AL(2, "Alagoas"),
-    AP(3, "Amapá"),
-    AM(4, "Amazonas"),
-    BA(5, "Bahia"),
-    CE(6, "Ceará"),
-    DF(7, "Distrito Federal"),
-    ES(8, "Espírito Santo"),
-    GO(9, "Goiás"),
-    MA(10, "Maranhão"),
-    MT(11, "Mato Grosso"),
-    MS(12, "Mato Grosso do Sul"),
-    MG(13, "Minas Gerais"),
-    PA(14, "Pará"),
-    PB(15, "Paraíba"),
-    PR(16, "Paraná"),
-    PE(17, "Pernambuco"),
-    PI(18, "Piauí"),
-    RJ(19, "Rio de Janeiro"),
-    RN(20, "Rio Grande do Norte"),
-    RS(21, "Rio Grande do Sul"),
-    RO(22, "Rondônia"),
-    RR(23, "Roraima"),
-    SC(24, "Santa Catarina"),
-    SP(25, "São Paulo"),
-    SE(26, "Sergipe"),
-    TO(27, "Tocantins");
+    AC(0, "Acre"),
+    AL(1, "Alagoas"),
+    AP(2, "Amapá"),
+    AM(3, "Amazonas"),
+    BA(4, "Bahia"),
+    CE(5, "Ceará"),
+    DF(6, "Distrito Federal"),
+    ES(7, "Espírito Santo"),
+    GO(8, "Goiás"),
+    MA(9, "Maranhão"),
+    MT(10, "Mato Grosso"),
+    MS(11, "Mato Grosso do Sul"),
+    MG(12, "Minas Gerais"),
+    PA(13, "Pará"),
+    PB(14, "Paraíba"),
+    PR(15, "Paraná"),
+    PE(16, "Pernambuco"),
+    PI(17, "Piauí"),
+    RJ(18, "Rio de Janeiro"),
+    RN(19, "Rio Grande do Norte"),
+    RS(20, "Rio Grande do Sul"),
+    RO(21, "Rondônia"),
+    RR(22, "Roraima"),
+    SC(23, "Santa Catarina"),
+    SP(24, "São Paulo"),
+    SE(25, "Sergipe"),
+    TO(26, "Tocantins");
 
     private final Integer cod;
     private final String description;
@@ -42,11 +42,13 @@ public enum UF {
         this.description = description;
     }
 
-     public static UF toEnum(Integer cod){
-        if(cod == null) return null;
+    public static UF toEnum(Integer cod) {
+        if (cod == null)
+            return null;
 
         for (UF interable : UF.values()) {
-            if (cod.equals(interable.getCod())) return interable;
+            if (cod.equals(interable.getCod()))
+                return interable;
         }
 
         throw new IdError();

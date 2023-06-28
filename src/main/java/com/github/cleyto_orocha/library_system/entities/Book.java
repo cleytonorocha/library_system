@@ -11,15 +11,16 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
 @Setter
-@ToString
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @PrimaryKeyJoinColumn(name = "idProduct")
@@ -44,6 +45,7 @@ public class Book extends Product {
     @NotEmpty(message = "The ISBN connot be empty")
     private String ISBN;
 
+    @Builder.Default
     @NotNull(message = "The state of book's required")
     private Boolean borrowed = false;
 

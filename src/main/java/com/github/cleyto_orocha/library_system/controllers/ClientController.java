@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.cleyto_orocha.library_system.entities.Client;
+import com.github.cleyto_orocha.library_system.controllers.dto.ClientDTO;
 import com.github.cleyto_orocha.library_system.services.ClientService;
 
 import jakarta.validation.Valid;
@@ -21,33 +21,33 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/api/clients")
 public class ClientController {
-    
+
     private final ClientService clientService;
 
     @GetMapping("/{id}")
-    public Client findById(@PathVariable Long id){
+    public ClientDTO findById(@PathVariable Long id) {
         return clientService.findById(id);
     }
 
     @GetMapping
-    public List<Client> findAll() {
+    public List<ClientDTO> findAll() {
         return clientService.listAll();
     }
 
     @PostMapping
-    public Client include(@RequestBody @Valid Client client){
-        return clientService.include(client);
-    }
-    
-    @PutMapping("/{id}")
-    public Client update(@PathVariable @Valid Long id, @RequestBody Client client) {
-        return clientService.update(id, client);
+    public Long include(@RequestBody @Valid ClientDTO clientDTO) {
+        return clientService.include(clientDTO);
     }
 
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         clientService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public ClientDTO update(@PathVariable @Valid Long id, @RequestBody ClientDTO clientDTO) {
+        return clientService.update(id, clientDTO);
     }
 
 }

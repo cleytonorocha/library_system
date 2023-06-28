@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.cleyto_orocha.library_system.entities.Book;
-import com.github.cleyto_orocha.library_system.entities.Paper;
+import com.github.cleyto_orocha.library_system.controllers.dto.BookDTO;
+import com.github.cleyto_orocha.library_system.controllers.dto.PaperDTO;
 import com.github.cleyto_orocha.library_system.entities.Product;
 import com.github.cleyto_orocha.library_system.services.ProductService;
 
@@ -46,17 +46,17 @@ public class ProductController {
     // Books Controller
 
     @GetMapping("/books/{id}")
-    public Product findBookById(@PathVariable Long id) {
+    public BookDTO findBookById(@PathVariable Long id) {
         return productService.findBookById(id);
     }
 
     @PostMapping("/books")
-    public Book includeBook(@RequestBody @Valid Book book) {
-        return productService.includeBook(book);
+    public long includeBook(@RequestBody @Valid BookDTO bookDTO) {
+        return productService.includeBook(bookDTO);
     }
 
     @GetMapping("/books")
-    public List<Book> findAllBooks() {
+    public List<BookDTO> findAllBooks() {
         return productService.findAllBooks();
     }
 
@@ -66,25 +66,25 @@ public class ProductController {
     }
 
     @PutMapping("/books/{id}")
-    public Book updateBook(@PathVariable @Valid Long id, @RequestBody Book book) {
-        return productService.updateBook(book, id);
+    public BookDTO updateBook(@PathVariable @Valid Long id, @RequestBody BookDTO bookDTO) {
+        return productService.updateBook(bookDTO, id);
     }
 
     // Paper Controller
 
     @GetMapping("/papers/{id}")
-    public Product findPaperById(@PathVariable Long id) {
+    public PaperDTO findPaperById(@PathVariable Long id) {
         return productService.findPaperById(id);
     }
 
     @GetMapping("/papers")
-    public List<Paper> findAllPaper() {
+    public List<PaperDTO> findAllPaper() {
         return productService.findAllPaper();
     }
 
     @PostMapping("/papers")
-    public Paper includePaper(@RequestBody @Valid Paper paper) {
-        return productService.includePaper(paper);
+    public long includePaper(@RequestBody @Valid PaperDTO paperDTO) {
+        return productService.includePaper(paperDTO);
     }
 
     @DeleteMapping("/papers/{id}")
@@ -93,8 +93,8 @@ public class ProductController {
     }
 
     @PutMapping("/papers/{id}")
-    public Paper updateBook(@PathVariable @Valid Long id, @RequestBody Paper paper) {
-        return productService.updatePaper(paper, id);
+    public PaperDTO updateBook(@PathVariable @Valid Long id, @RequestBody PaperDTO paperDTO) {
+        return productService.updatePaper(paperDTO, id);
     }
 
 }
