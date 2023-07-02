@@ -2,13 +2,13 @@ package com.github.cleyto_orocha.library_system.controllers.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
+import com.github.cleyto_orocha.library_system.entities.Acquisition;
+import com.github.cleyto_orocha.library_system.entities.Client;
 import com.github.cleyto_orocha.library_system.entities.Product;
-import com.github.cleyto_orocha.library_system.entities.nxn.Client_Product;
-import com.github.cleyto_orocha.library_system.entities.nxn.Product_Acquisition;
 import com.github.cleyto_orocha.library_system.enums.TypeProduct;
 
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -17,14 +17,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Entity
 @Getter
 @Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class ProductDTO extends Product{
-
+public class ProductDTO {
     private Long id;
 
     @NotNull(message = "The product name's required")
@@ -41,8 +39,25 @@ public abstract class ProductDTO extends Product{
     @NotNull(message = "The price's required")
     private BigDecimal price;
 
-    private List<Client_Product> listClients;
+    private List<Client> listClients;
 
-    private List<Product_Acquisition> operations;
+    private Set<Acquisition> operations;
+
+    public static ProductDTO buildProductDTO(Product product) {
+        return ProductDTO.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .codBarr(product.getCodBarr())
+                .type(product.getType())
+                .price(product.getPrice())
+                .listClients(product.getListClients())
+                .operations(product.getOperations())
+                .build();
+    }
+
+    public Product buildProduct(ProductDTO productDTO) {
+        Product product = new Product(null,productDTO.getName(),productDTO.getCodBarr(), productDTO.getType(),productDTO.getPrice(),productDTO.getListClients(),productDTO.getOperations());
+        return product;
+    }
 
 }

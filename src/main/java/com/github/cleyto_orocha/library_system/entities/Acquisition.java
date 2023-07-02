@@ -1,25 +1,25 @@
 package com.github.cleyto_orocha.library_system.entities;
 
 import java.time.Instant;
-import java.util.List;
+import java.util.Set;
 
-import com.github.cleyto_orocha.library_system.entities.nxn.Product_Acquisition;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.cleyto_orocha.library_system.enums.AcquisitionStatus;
 import com.github.cleyto_orocha.library_system.enums.AcquisitionType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,29 +27,31 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Acquisition {
-     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-     @OneToMany(mappedBy = "acquisition", fetch = FetchType.LAZY)
-     private List<Product_Acquisition> products;
+    @NotNull(message = "The data of acquisition's required")
+    private Instant acquisitionDate;
 
-     @ManyToOne
-     @JoinColumn(name = "id_client")
-     private Client client;
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "The type of acquisition's required")
+    private AcquisitionType type;
 
-     @Min(1)
-     @Max(100)
-     private Integer quantity;
+    @ManyToMany
+    @JoinTable(name = "acquisition_product", joinColumns = @JoinColumn(name = "id_product"), inverseJoinColumns = @JoinColumn(name = "id_acquisition"))
+    private Set<Product> products;
 
-     @NotNull(message = "The data of acquisition's required")
-     private Instant acquisitionDate;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "id_client")
+    private Client client;
 
-     @Enumerated(EnumType.STRING)
-     @NotNull(message = "The type of acquisition's required")
-     private AcquisitionType type;
-
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "The status of acquisition cannot be null")
+    private AcquisitionStatus status;
 }

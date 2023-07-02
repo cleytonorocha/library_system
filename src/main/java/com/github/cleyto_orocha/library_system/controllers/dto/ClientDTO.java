@@ -1,6 +1,5 @@
 package com.github.cleyto_orocha.library_system.controllers.dto;
 
-import java.util.List;
 import java.util.Set;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -8,7 +7,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import com.github.cleyto_orocha.library_system.entities.Acquisition;
 import com.github.cleyto_orocha.library_system.entities.Address;
 import com.github.cleyto_orocha.library_system.entities.Client;
-import com.github.cleyto_orocha.library_system.entities.nxn.Client_Product;
+import com.github.cleyto_orocha.library_system.entities.Product;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -38,27 +37,27 @@ public class ClientDTO {
     
     private Address address;
 
-    private Set<Client_Product> whishList;
+    private Set<Product> whishList;
     
-    private List<Acquisition> acquitionList;
+    private Set<Acquisition> acquisitionList;
     
     public static ClientDTO buildClientDTO(Client client){
         return ClientDTO.builder()
         .id(client.getId())
+        .name(client.getName())
         .CPF(client.getCPF())
         .address(client.getAddress())
-        .whishList(client.getWhishList())
-        .acquitionList(client.getAcquitionList())
+        .acquisitionList(client.getAcquisitionList())
         .build();
     }
 
     public static Client buildClient(ClientDTO clientDTO){
         return Client.builder()
         .id(clientDTO.getId())
+        .name(clientDTO.getName())
         .CPF(clientDTO.getCPF())
         .address(clientDTO.getAddress())
-        .whishList(clientDTO.getWhishList())
-        .acquitionList(clientDTO.getAcquitionList())
+        .acquisitionList(clientDTO.getAcquisitionList())
         .build();
     }
 }

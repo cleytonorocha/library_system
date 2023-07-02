@@ -2,7 +2,6 @@ package com.github.cleyto_orocha.library_system.controllers.dto;
 
 import com.github.cleyto_orocha.library_system.entities.Paper;
 
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Entity
 @Getter
 @Setter
 @SuperBuilder
