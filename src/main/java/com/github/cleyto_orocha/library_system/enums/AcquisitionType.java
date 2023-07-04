@@ -23,6 +23,6 @@ public enum AcquisitionType {
                 return interable;
         }
 
-        throw new IdError();
+        throw new IdError("Invalid acquisitionType code");
     }
 }

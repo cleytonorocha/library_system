@@ -21,7 +21,7 @@ public class AddressService {
 
     public AddressDTO findById(Long id) {
         return AddressDTO.buildAddressDTO(addressRepository.findById(id)
-                        .orElseThrow(() -> new IdError()));
+                        .orElseThrow(() -> new IdError("Invalid address code")));
     }
 
     public List<AddressDTO> findAll() {
@@ -43,7 +43,7 @@ public class AddressService {
         addressRepository.findById(id).map(m -> {
             addressRepository.delete(m);
             return Void.TYPE;
-        }).orElseThrow(() -> new IdError());
+        }).orElseThrow(() -> new IdError("Invalid address code"));
     }
 
     public AddressDTO update(AddressDTO addressDTO, Long id) {

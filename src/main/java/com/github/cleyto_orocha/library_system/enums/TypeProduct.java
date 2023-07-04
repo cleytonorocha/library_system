@@ -23,7 +23,7 @@ public enum TypeProduct {
                 return interable;
         }
 
-        throw new IdError();
+        throw new IdError("Invalid typeproduct code");
 
     }
 }

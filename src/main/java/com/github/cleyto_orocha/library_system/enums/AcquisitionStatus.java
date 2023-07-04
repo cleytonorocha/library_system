@@ -24,6 +24,6 @@ public enum AcquisitionStatus {
                 return interable;
         }
 
-        throw new IdError();
+        throw new IdError("Invalid aquisitionStatus code");
     }
 }

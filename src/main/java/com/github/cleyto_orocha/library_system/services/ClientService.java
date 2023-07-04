@@ -19,7 +19,7 @@ public class ClientService {
 
     public ClientDTO findById(Long id) {
         return ClientDTO.buildClientDTO(clientRepository.findById(id)
-                .orElseThrow(() -> new IdError()));
+                .orElseThrow(() -> new IdError("Invalid client code")));
     }
 
     public List<ClientDTO> listAll() {
@@ -40,7 +40,7 @@ public class ClientService {
                 .map(m -> {
                     clientRepository.delete(m);
                     return Void.TYPE;
-                }).orElseThrow(() -> new IdError());
+                }).orElseThrow(() -> new IdError("Invalid client code"));
     }
 
     public ClientDTO update(Long id, ClientDTO clientDTO) {
@@ -50,7 +50,7 @@ public class ClientService {
                     clientRepository.save(ClientDTO.buildClient(clientDTO));
                     return clientDTO;
                 })
-                .orElseThrow(() -> new IdError());
+                .orElseThrow(() -> new IdError("Invalid client code"));
     }
 
 }

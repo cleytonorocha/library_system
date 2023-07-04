@@ -25,7 +25,7 @@ public class AcquisitionService {
 
     public AcquisitionDTO findById(Long id) {
         return AcquisitionDTO.buildAcquisitionDTO(acquisitionRepository.findById(id)
-                .orElseThrow(() -> new IdError()));
+                .orElseThrow(() -> new IdError("Invalid acquisition code")));
     }
 
     public List<AcquisitionDTO> findAll() {
@@ -60,6 +60,6 @@ public class AcquisitionService {
                 .map(m -> {
                     m.setStatus(acquisitionDTO.getStatus());
                     return acquisitionRepository.save(m).getStatus();
-                }).orElseThrow(() -> new IdError());
+                }).orElseThrow(() -> new IdError("Invalid acquisition code"));
     }
 }

@@ -27,7 +27,7 @@ public class ProductService {
     // Product Service
 
     public Product findProductById(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new IdError());
+        return productRepository.findById(id).orElseThrow(() -> new IdError("Invalid product code"));
     }
 
     public List<Product> findAllProducts() {
@@ -40,20 +40,20 @@ public class ProductService {
                 .map(m -> {
                     productRepository.delete(m);
                     return Void.TYPE;
-                }).orElseThrow(() -> new IdError());
+                }).orElseThrow(() -> new IdError("Invalid product code"));
     }
 
     // Book Service
 
     public BookDTO findBookById(Long id) {
         return BookDTO.buildBookDTO(bookRepository.findById(id)
-                .orElseThrow(() -> new IdError()));
+                .orElseThrow(() -> new IdError("Invalid product code")));
     }
 
     public List<BookDTO> findAllBooks() {
         return bookRepository.findAll()
                 .stream()
-                .map(m -> BookDTO.buildBookDTO(m))
+                .map(BookDTO::buildBookDTO)
                 .collect(Collectors.toList());
     }
 
@@ -69,7 +69,7 @@ public class ProductService {
                 .map(m -> {
                     bookRepository.delete(m);
                     return Void.TYPE;
-                }).orElseThrow(() -> new IdError());
+                }).orElseThrow(() -> new IdError("Invalid product code"));
     }
 
     public BookDTO updateBook(BookDTO bookDTO, Long id) {
@@ -78,14 +78,14 @@ public class ProductService {
                     bookDTO.setId(m.getId());
                     bookRepository.save(BookDTO.buildBook(bookDTO));
                     return bookDTO;
-                }).orElseThrow(() -> new IdError());
+                }).orElseThrow(() -> new IdError("Invalid product code"));
     }
 
     // Paper Service
 
     public PaperDTO findPaperById(Long id) {
         return PaperDTO.buildPaperDTO(paperRepository.findById(id)
-                .orElseThrow(() -> new IdError()));
+                .orElseThrow(() -> new IdError("Invalid product code")));
     }
 
     public List<PaperDTO> findAllPaper() {
@@ -106,7 +106,7 @@ public class ProductService {
                 .map(m -> {
                     paperRepository.delete(m);
                     return Void.TYPE;
-                }).orElseThrow(() -> new IdError());
+                }).orElseThrow(() -> new IdError("Invalid product code"));
     }
 
     public PaperDTO updatePaper(PaperDTO paperDTO, Long id) {
@@ -115,7 +115,7 @@ public class ProductService {
                     paperDTO.setId(m.getId());
                     paperRepository.save(PaperDTO.buildPaper(paperDTO));
                     return paperDTO;
-                }).orElseThrow(() -> new IdError());
+                }).orElseThrow(() -> new IdError("Invalid product code"));
     }
 
 }
