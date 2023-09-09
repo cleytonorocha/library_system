@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.github.cleyto_orocha.library_system.exception.IdError;
+import com.github.cleyto_orocha.library_system.exception.InvalidJwtAuthenticationException;
 
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
@@ -26,8 +27,14 @@ public class ApplicationControllerAdvice {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(IdError.class)
-    public ApiError handlerIdError(IdError idError){
+    public ApiError handlerIdError(IdError idError) {
         return new ApiError(idError.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public InvalidJwtAuthenticationException handlerInvalidJwtAuthenticationException(IdError idError) {
+        return new InvalidJwtAuthenticationException(idError.getMessage());
     }
 
 }

@@ -1,6 +1,5 @@
 package com.github.cleyto_orocha.library_system.services;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +26,8 @@ public class ProductService {
     // Product Service
 
     public Product findProductById(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new IdError("Invalid product code"));
+        return productRepository.findById(id)
+                .orElseThrow(() -> new IdError("Invalid product code"));
     }
 
     public List<Product> findAllProducts() {
