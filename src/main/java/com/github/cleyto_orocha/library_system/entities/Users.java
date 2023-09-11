@@ -80,4 +80,10 @@ public class Users implements UserDetails {
         return true;
     }
 
+    public Users(String login, String encryptedPassword, UserRole role) {
+        this.login = login;
+        this.password = encryptedPassword;
+        this.role = role;
+    }
+
 }
