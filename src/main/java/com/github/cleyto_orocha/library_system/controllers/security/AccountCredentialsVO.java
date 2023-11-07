@@ -1,4 +1,4 @@
-package com.github.cleyto_orocha.library_system.controllers.vo;
+package com.github.cleyto_orocha.library_system.controllers.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountCredentialsVO {
-    private String userName;
+    private String login;
     private String password;
 }

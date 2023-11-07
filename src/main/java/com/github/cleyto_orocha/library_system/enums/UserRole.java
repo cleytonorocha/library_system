@@ -1,8 +1,8 @@
 package com.github.cleyto_orocha.library_system.enums;
 
 public enum UserRole {
-    ADMIN(1, "Administrator"),
-    USER(2, "User");
+    ADMIN(0 ,"ADMIN"),
+    USER(1,"USER");
 
     private Integer cod;
     private String description;
