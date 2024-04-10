@@ -18,7 +18,7 @@ O projeto tem três application.properties, uma para o desenvolvimento, outra pa
   - Custom Exceptions.
 - Spring Framework;
   - Spring Boot;
-  - Spring Security + JWT;
+  - Spring Security 6 + JWT;
   - Spring JPA;
   - Validation. 
 - JPA + HIBERNATE
