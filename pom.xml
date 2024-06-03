@@ -13,7 +13,7 @@
 	<artifactId>library_system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>library_system</name>
-	
+
 	<properties>
 		<java.version>17</java.version>
 		<spring-security.version>6.1.3</spring-security.version>
@@ -63,7 +63,7 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.7.3</version>
-		</dependency>		
+		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -82,6 +82,12 @@
 			<version>4.4.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -92,6 +98,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 
 </project>
