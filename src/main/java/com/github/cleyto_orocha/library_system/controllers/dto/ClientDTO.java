@@ -29,35 +29,35 @@ public class ClientDTO {
     @NotNull(message = "The name is required")
     @NotEmpty(message = "The name cannot be empty")
     private String name;
-    
-    @CPF
+
+    @CPF(message = "Invalid Brazilian individual taxpayer registration number (CPF)")
     @NotNull(message = "The CPF is required")
     @NotEmpty(message = "The CPF cannot be empty")
     private String CPF;
-    
+
     private Address address;
 
     private Set<Product> whishList;
-    
+
     private Set<Acquisition> acquisitionList;
-    
-    public static ClientDTO buildClientDTO(Client client){
+
+    public static ClientDTO buildClientDTO(Client client) {
         return ClientDTO.builder()
-        .id(client.getId())
-        .name(client.getName())
-        .CPF(client.getCPF())
-        .address(client.getAddress())
-        .acquisitionList(client.getAcquisitionList())
-        .build();
+                .id(client.getId())
+                .name(client.getName())
+                .CPF(client.getCPF())
+                .address(client.getAddress())
+                .acquisitionList(client.getAcquisitionList())
+                .build();
     }
 
-    public static Client buildClient(ClientDTO clientDTO){
+    public static Client buildClient(ClientDTO clientDTO) {
         return Client.builder()
-        .id(clientDTO.getId())
-        .name(clientDTO.getName())
-        .CPF(clientDTO.getCPF())
-        .address(clientDTO.getAddress())
-        .acquisitionList(clientDTO.getAcquisitionList())
-        .build();
+                .id(clientDTO.getId())
+                .name(clientDTO.getName())
+                .CPF(clientDTO.getCPF())
+                .address(clientDTO.getAddress())
+                .acquisitionList(clientDTO.getAcquisitionList())
+                .build();
     }
 }

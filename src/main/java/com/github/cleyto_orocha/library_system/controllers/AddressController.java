@@ -15,12 +15,14 @@ import com.github.cleyto_orocha.library_system.controllers.dto.AddressDTO;
 import com.github.cleyto_orocha.library_system.services.AddressService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/address")
+@Tag(name = "Address", description = "Address operations by the client")
 public class AddressController {
 
     private final AddressService addressService;

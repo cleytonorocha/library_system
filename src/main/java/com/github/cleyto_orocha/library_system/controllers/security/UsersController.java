@@ -14,10 +14,12 @@ import com.github.cleyto_orocha.library_system.controllers.dto.RegisterDTO;
 import com.github.cleyto_orocha.library_system.entities.Users;
 import com.github.cleyto_orocha.library_system.services.security.UsersService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Login", description = "Come and login on API!")
 public class UsersController {
 
     @Autowired

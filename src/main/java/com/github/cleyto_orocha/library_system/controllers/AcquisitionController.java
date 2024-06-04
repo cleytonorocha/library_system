@@ -14,12 +14,14 @@ import com.github.cleyto_orocha.library_system.enums.AcquisitionStatus;
 import com.github.cleyto_orocha.library_system.services.AcquisitionService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/acquisition")
+@Tag(name = "Acquisition", description = "Rest operations of product purchases by the client")
 public class AcquisitionController {
 
     private final AcquisitionService acquisitionService;

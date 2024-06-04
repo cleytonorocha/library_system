@@ -17,12 +17,14 @@ import com.github.cleyto_orocha.library_system.entities.Product;
 import com.github.cleyto_orocha.library_system.services.ProductService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/products")
+@Tag(name = "Product", description = "Operations related by products")
 public class ProductController {
 
     private final ProductService productService;

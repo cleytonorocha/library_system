@@ -15,12 +15,14 @@ import com.github.cleyto_orocha.library_system.controllers.dto.ClientDTO;
 import com.github.cleyto_orocha.library_system.services.ClientService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/clients")
+@Tag(name = "Client", description = "Client operations - ")
 public class ClientController {
 
     private final ClientService clientService;
@@ -40,6 +42,7 @@ public class ClientController {
     @Operation(summary = "Save a client")
     @PostMapping
     public Long include(@RequestBody @Valid ClientDTO clientDTO) {
+        clientDTO.setId(null);
         return clientService.include(clientDTO);
     }
 
