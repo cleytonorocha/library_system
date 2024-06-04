@@ -4,6 +4,7 @@ package com.github.cleyto_orocha.library_system.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.cleyto_orocha.library_system.enums.UF;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Hidden
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,5 +1,6 @@
 package com.github.cleyto_orocha.library_system.entities;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -15,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Getter
 @Setter
+@Hidden
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

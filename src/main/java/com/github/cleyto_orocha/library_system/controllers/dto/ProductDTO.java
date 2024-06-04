@@ -3,6 +3,7 @@ package com.github.cleyto_orocha.library_system.controllers.dto;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.github.cleyto_orocha.library_system.entities.Acquisition;
 import com.github.cleyto_orocha.library_system.entities.Client;
@@ -55,9 +56,21 @@ public class ProductDTO {
                 .build();
     }
 
-    public Product buildProduct(ProductDTO productDTO) {
-        Product product = new Product(null,productDTO.getName(),productDTO.getCodBarr(), productDTO.getType(),productDTO.getPrice(),productDTO.getListClients(),productDTO.getOperations());
+    public static Product buildProduct(ProductDTO productDTO) {
+        Product product = new Product(null, productDTO.getName(), productDTO.getCodBarr(), productDTO.getType(),
+                productDTO.getPrice(), productDTO.getListClients(), productDTO.getOperations());
         return product;
     }
 
+    public static Set<ProductDTO> toSetProductDTO(Set<Product> products) {
+        return products.stream()
+                .map(m -> ProductDTO.buildProductDTO(m))
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<Product> toSetProduct(Set<ProductDTO> productsDTO) {
+        return productsDTO.stream()
+                .map(m -> ProductDTO.buildProduct(m))
+                .collect(Collectors.toSet());
+    }
 }

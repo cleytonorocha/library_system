@@ -7,6 +7,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.cleyto_orocha.library_system.enums.TypeProduct;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -28,6 +29,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Getter
 @Setter
+@Hidden
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

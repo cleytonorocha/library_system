@@ -4,8 +4,6 @@ import java.time.Instant;
 import java.util.Set;
 
 import com.github.cleyto_orocha.library_system.entities.Acquisition;
-import com.github.cleyto_orocha.library_system.entities.Client;
-import com.github.cleyto_orocha.library_system.entities.Product;
 import com.github.cleyto_orocha.library_system.enums.AcquisitionStatus;
 import com.github.cleyto_orocha.library_system.enums.AcquisitionType;
 
@@ -24,8 +22,8 @@ import lombok.Setter;
 public class AcquisitionDTO {
 
      private Long id;
-     private Set<Product> products;
-     private Client client;
+     private Set<ProductDTO> products;
+     private ClientDTO client;
 
      @NotNull(message = "The data of acquisition's required")
      private Instant acquisitionDate;
@@ -39,8 +37,8 @@ public class AcquisitionDTO {
      public static AcquisitionDTO buildAcquisitionDTO(Acquisition acquisition) {
           return AcquisitionDTO.builder()
                     .id(acquisition.getId())
-                    .products(acquisition.getProducts())
-                    .client(acquisition.getClient())
+                    .products(ProductDTO.toSetProductDTO(acquisition.getProducts()))
+                    .client(ClientDTO.buildClientDTO(acquisition.getClient()))
                     .acquisitionDate(acquisition.getAcquisitionDate())
                     .type(acquisition.getType())
                     .status(acquisition.getStatus())
@@ -50,11 +48,15 @@ public class AcquisitionDTO {
      public static Acquisition buildAcquisition(AcquisitionDTO acquisitionDTO) {
           return Acquisition.builder()
                     .id(acquisitionDTO.getId())
-                    .products(acquisitionDTO.getProducts())
-                    .client(acquisitionDTO.getClient())
+                    .products(ProductDTO.toSetProduct(acquisitionDTO.getProducts()))
+                    .client(ClientDTO.buildClient(acquisitionDTO.getClient()))
                     .acquisitionDate(acquisitionDTO.getAcquisitionDate())
                     .type(acquisitionDTO.getType())
                     .status(acquisitionDTO.getStatus())
                     .build();
      }
+
+
+
+
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.github.cleyto_orocha.library_system.controllers.dto.AcquisitionDTO;
 import com.github.cleyto_orocha.library_system.controllers.dto.ClientDTO;
 import com.github.cleyto_orocha.library_system.controllers.dto.ProductDTO;
+import com.github.cleyto_orocha.library_system.entities.Acquisition;
 import com.github.cleyto_orocha.library_system.entities.Product;
 import com.github.cleyto_orocha.library_system.enums.AcquisitionStatus;
 import com.github.cleyto_orocha.library_system.exception.IdError;
@@ -36,7 +37,8 @@ public class AcquisitionService {
     }
 
     public AcquisitionDTO include(AcquisitionDTO acquisitionDTO) {
-        acquisitionDTO.setProducts(
+        Acquisition acquisition = AcquisitionDTO.buildAcquisition(acquisitionDTO);
+        acquisition.setProducts(
                 acquisitionDTO.getProducts()
                         .stream()
                         .map(m -> {
@@ -45,14 +47,13 @@ public class AcquisitionService {
                             return product;
                         }).collect(Collectors.toSet()));
 
-        acquisitionDTO.setClient(
+        acquisition.setClient(
                 ClientDTO.buildClient(
                         clientService.findById(
                                 acquisitionDTO.getClient()
                                         .getId())));
 
-        return AcquisitionDTO
-                .buildAcquisitionDTO(acquisitionRepository.save(AcquisitionDTO.buildAcquisition(acquisitionDTO)));
+        return AcquisitionDTO.buildAcquisitionDTO(acquisitionRepository.save(acquisition));
     }
 
     public AcquisitionStatus modifyAcquisitionStatus(Long id, AcquisitionDTO acquisitionDTO) {

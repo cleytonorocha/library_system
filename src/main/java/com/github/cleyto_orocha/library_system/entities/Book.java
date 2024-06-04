@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import org.hibernate.validator.constraints.ISBN;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -20,6 +21,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Getter
 @Setter
+@Hidden
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

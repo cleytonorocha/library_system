@@ -1,7 +1,6 @@
 package com.github.cleyto_orocha.library_system.controllers.dto;
 
 import com.github.cleyto_orocha.library_system.entities.Address;
-import com.github.cleyto_orocha.library_system.entities.Client;
 import com.github.cleyto_orocha.library_system.enums.UF;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -36,7 +35,7 @@ public class AddressDTO {
     @NotEmpty(message = "The street connot be empty")
     private String street;
 
-    private Client client;
+    private ClientDTO client;
 
     public static AddressDTO buildAddressDTO(Address address) {
         return AddressDTO.builder()
@@ -45,7 +44,7 @@ public class AddressDTO {
                 .city(address.getCity())
                 .neighborhood(address.getNeighborhood())
                 .street(address.getStreet())
-                .client(address.getClient())
+                .client(ClientDTO.buildClientDTO(address.getClient()))
                 .build();
     }
 

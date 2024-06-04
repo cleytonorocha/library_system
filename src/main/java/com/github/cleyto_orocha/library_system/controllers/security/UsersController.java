@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.cleyto_orocha.library_system.controllers.dto.RegisterDTO;
 import com.github.cleyto_orocha.library_system.entities.Users;
+import com.github.cleyto_orocha.library_system.enums.SwaggerEnum;
 import com.github.cleyto_orocha.library_system.services.security.UsersService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,26 +20,27 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
-@Tag(name = "Login", description = "Come and login on API!")
+@Tag(name = SwaggerEnum.USER_TAG_NAME, description = SwaggerEnum.USER_TAG_DESCRIPTION)
 public class UsersController {
 
     @Autowired
     private UsersService usersService;
 
     @GetMapping
-    public List<Users> findAll() {
-        return usersService.listAll();
+    public ResponseEntity<List<Users>> findAll() {
+        List<Users> users = usersService.listAll();
+        return ResponseEntity.ok().body(users);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AccountCredentialsVO accountCredentialsVO){
-        return usersService.login(accountCredentialsVO);
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AccountCredentialsVO accountCredentialsVO) {
+        ResponseEntity<LoginResponseDTO> response = usersService.login(accountCredentialsVO);
+        return response;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<LoginResponseDTO> register (@RequestBody @Valid RegisterDTO data){
-        return usersService.register(data);
+    public ResponseEntity<LoginResponseDTO> register(@RequestBody @Valid RegisterDTO data) {
+        ResponseEntity<LoginResponseDTO> response = usersService.register(data);
+        return response;
     }
-
-    
 }
