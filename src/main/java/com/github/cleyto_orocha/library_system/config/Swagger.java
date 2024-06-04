@@ -3,11 +3,6 @@ package com.github.cleyto_orocha.library_system.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.cleyto_orocha.library_system.entities.Client;
-
-import io.swagger.v3.core.converter.AnnotatedType;
-import io.swagger.v3.core.converter.ModelConverters;
-import io.swagger.v3.core.converter.ResolvedSchema;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
@@ -41,11 +36,5 @@ public class Swagger {
                                                                                 .scheme("bearer")
                                                                                 .bearerFormat("JWT")
                                                                                 .in(SecurityScheme.In.HEADER)));
-        }
-
-        @Bean
-        public ResolvedSchema hiddenSchema() {
-                return ModelConverters.getInstance()
-                                .resolveAsResolvedSchema(new AnnotatedType(Client.class).resolveAsRef(false));
         }
 }
