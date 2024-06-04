@@ -17,6 +17,8 @@ import com.github.cleyto_orocha.library_system.entities.Users;
 import com.github.cleyto_orocha.library_system.repositories.UsersRepository;
 import com.github.cleyto_orocha.library_system.security.JwtService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @Service
 public class UsersService {
 
@@ -29,6 +31,7 @@ public class UsersService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Operation(summary = "Login a user with a token")
     public ResponseEntity<LoginResponseDTO> login(AccountCredentialsVO accountCredentialsVO) {
         UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(
                 accountCredentialsVO.getLogin(),
@@ -39,6 +42,7 @@ public class UsersService {
 
     }
 
+    @Operation(summary = "Register a user and return a token")
     public ResponseEntity<LoginResponseDTO> register(RegisterDTO registerDTO) {
         if (usersRepository.existsByLogin(registerDTO.login()))
             return ResponseEntity.badRequest().build();
@@ -52,6 +56,7 @@ public class UsersService {
         return ResponseEntity.ok().body(new LoginResponseDTO(user.getPassword()));
     }
 
+    @Operation(summary = "List all users")
     public List<Users> listAll() {
         return usersRepository.findAll();
     }
