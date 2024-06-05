@@ -22,7 +22,6 @@ public class Swagger {
         return new OpenAPI()
 
                 .info(new Info()
-                
                         .title("Library System")
                         .version("1.0")
                         .description(
