@@ -42,8 +42,7 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/library/**")).permitAll()
                         .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/**")).hasAnyAuthority(UserRole.ADMIN.getDescription(), UserRole.USER.getDescription())
                         .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/**")).hasAuthority(UserRole.ADMIN.getDescription())
                         .requestMatchers(mvc.pattern(HttpMethod.DELETE, "/api/**")).hasAuthority(UserRole.ADMIN.getDescription())
