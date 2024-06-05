@@ -1,4 +1,5 @@
-FROM openjdk:18-jdk-slim
+FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
-COPY /target/library_system-0.0.1-SNAPSHOT.jar app-library.jar
-ENTRYPOINT [ "java", "-jar",  app-library.jar]
+COPY target/library_system-1.0.0.jar library_system.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "library_system.jar"]
