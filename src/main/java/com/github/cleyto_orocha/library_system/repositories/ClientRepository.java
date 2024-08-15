@@ -8,5 +8,5 @@ import com.github.cleyto_orocha.library_system.entities.Client;
 
 
 public interface ClientRepository extends JpaRepository<Client, Long>{
-    public Optional<Client> findByCpf(String cpf);
+    public Optional<Boolean> findByCpf(String cpf);
 }
