@@ -1,7 +1,5 @@
 package com.github.cleyto_orocha.library_system.config;
 
-import java.util.Arrays;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,7 +11,6 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
-import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
 @OpenAPIDefinition
@@ -23,7 +20,6 @@ public class Swagger {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .servers(Arrays.asList(new Server().url("https://library.cleytonorocha.com.br"),new Server().url("http://localhost:8080")))
                 .info(new Info()
                         .title("Library System")
                         .version("1.0")
