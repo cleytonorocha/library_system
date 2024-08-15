@@ -20,6 +20,8 @@ import com.github.cleyto_orocha.library_system.enums.SwaggerEnum;
 import com.github.cleyto_orocha.library_system.services.ProductService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -59,9 +61,9 @@ public class ProductController {
 
     @Operation(summary = "Save a book")
     @PostMapping("/books")
-    public ResponseEntity<Long> includeBook(@RequestBody @Valid BookDTO bookDTO) {
+    public ResponseEntity<String> includeBook(@RequestBody @Valid BookDTO bookDTO) {
         Long bookId = productService.includeBook(bookDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(bookId);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Book id: " + bookId);
     }
 
     @Operation(summary = "Get all books")
@@ -101,11 +103,11 @@ public class ProductController {
         return ResponseEntity.ok().body(papers);
     }
 
-    @Operation(summary = "Save a paper")
+    @Operation(summary = "Save a paper", requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Save a product of type paper", content = @Content(schema = @Schema(implementation = PaperDTO.class))))
     @PostMapping("/papers")
-    public ResponseEntity<Long> includePaper(@RequestBody @Valid PaperDTO paperDTO) {
+    public ResponseEntity<String> includePaper(@RequestBody @Valid PaperDTO paperDTO) {
         Long paperId = productService.includePaper(paperDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(paperId);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Paper id: " + paperId);
     }
 
     @Operation(summary = "Delete a paper by id")

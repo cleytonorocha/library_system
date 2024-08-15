@@ -42,7 +42,7 @@ public class AcquisitionService {
                 acquisitionDTO.getProducts()
                         .stream()
                         .map(m -> {
-                            Product product = productService.findProductById(m.getId());
+                            Product product = productService.findProductById(m);
                             ProductDTO.buildProductDTO(product);
                             return product;
                         }).collect(Collectors.toSet()));
@@ -50,8 +50,7 @@ public class AcquisitionService {
         acquisition.setClient(
                 ClientDTO.buildClient(
                         clientService.findById(
-                                acquisitionDTO.getClient()
-                                        .getId())));
+                                acquisitionDTO.getClientId())));
 
         return AcquisitionDTO.buildAcquisitionDTO(acquisitionRepository.save(acquisition));
     }

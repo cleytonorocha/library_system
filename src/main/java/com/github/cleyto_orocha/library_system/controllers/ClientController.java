@@ -2,7 +2,6 @@ package com.github.cleyto_orocha.library_system.controllers;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +17,8 @@ import com.github.cleyto_orocha.library_system.enums.SwaggerEnum;
 import com.github.cleyto_orocha.library_system.services.ClientService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,10 @@ public class ClientController {
 
     private final ClientService clientService;
 
-    @Operation(summary = "Get a client by id")
+    @Operation(
+        summary = "Get a client by id",
+        description = "Don't forget that you need to have a registered client for a result to be returned."
+    )
     @GetMapping("/{id}")
     public ResponseEntity<ClientDTO> findById(@PathVariable Long id) {
         ClientDTO clientDTO = clientService.findById(id);
@@ -44,11 +48,19 @@ public class ClientController {
         return ResponseEntity.ok().body(clientDTOs);
     }
 
-    @Operation(summary = "Save a client")
+    @Operation(
+        summary = "Save a client",
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+        description = "Save a client",
+        content = @Content(
+                schema = @Schema(implementation = ClientDTO.class)
+                )
+            )
+        )
     @PostMapping
-    public ResponseEntity<String> include(@RequestBody @Valid ClientDTO clientDTO) {
-        Long clientId = clientService.include(clientDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Client id: " + clientId);
+    public ResponseEntity<String> save(@RequestBody @Valid ClientDTO clientDTO) {
+        Long clientId = clientService.save(clientDTO);
+        return ResponseEntity.ok().body("Client id: " + clientId);
     }
 
     @Operation(summary = "Delete a client by id")

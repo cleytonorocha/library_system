@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.github.cleyto_orocha.library_system.controllers.dto.ClientDTO;
+import com.github.cleyto_orocha.library_system.entities.Client;
+import com.github.cleyto_orocha.library_system.exception.CpfPresentException;
 import com.github.cleyto_orocha.library_system.exception.IdError;
 import com.github.cleyto_orocha.library_system.repositories.ClientRepository;
 
@@ -29,10 +31,12 @@ public class ClientService {
                 .collect(Collectors.toList());
     }
 
-    public Long include(ClientDTO clientDTO) {
-        return clientRepository.save(
-                ClientDTO.buildClient(clientDTO))
-                .getId();
+    public Long save(ClientDTO clientDTO) {
+        clientRepository.findByCpf(clientDTO.getCpf()).ifPresent(client -> {
+            throw new CpfPresentException("CPF is already registred");
+        });
+        Client clientSaved = clientRepository.save(ClientDTO.buildClient(clientDTO));
+        return clientSaved.getId();
     }
 
     public void delete(Long id) {

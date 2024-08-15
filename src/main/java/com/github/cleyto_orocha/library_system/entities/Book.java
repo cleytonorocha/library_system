@@ -45,7 +45,7 @@ public class Book extends Product {
     @ISBN
     @NotNull(message = "The ISBN's required")
     @NotEmpty(message = "The ISBN connot be empty")
-    private String ISBN;
+    private String isbn;
 
     @Builder.Default
     @NotNull(message = "The state of book's required")

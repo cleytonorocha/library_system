@@ -34,3 +34,7 @@ build/
 
 src/main/resources/application.properties
 src/main/resources/static/ssl/
+src/main/resources/keystore.p12
+src/main/resources/origin-cert.pem
+src/main/resources/origin-key.pem
+src/main/resources/static/ssl/

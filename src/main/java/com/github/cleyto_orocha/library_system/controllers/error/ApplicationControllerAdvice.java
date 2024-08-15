@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.github.cleyto_orocha.library_system.exception.CpfPresentException;
 import com.github.cleyto_orocha.library_system.exception.IdError;
 import com.github.cleyto_orocha.library_system.exception.InvalidJwtAuthenticationException;
+import com.github.cleyto_orocha.library_system.exception.UserPresentException;
 
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
@@ -27,14 +29,31 @@ public class ApplicationControllerAdvice {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(IdError.class)
-    public ApiError handlerIdError(IdError idError) {
-        return new ApiError(idError.getMessage());
+    public ApiError handlerIdError(IdError ex) {
+        return new ApiError(ex.getLocalizedMessage());
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(InvalidJwtAuthenticationException.class)
-    public InvalidJwtAuthenticationException handlerInvalidJwtAuthenticationException(IdError idError) {
-        return new InvalidJwtAuthenticationException(idError.getMessage());
+    public ApiError handlerInvalidJwtAuthenticationException(IdError ex) {
+        return new ApiError(ex.getLocalizedMessage());
+
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CpfPresentException.class)
+    public ApiError handlerCpfPresentException(CpfPresentException ex) {
+        return new ApiError(ex.getLocalizedMessage());
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(UserPresentException.class)
+    public ApiError handlerCpfPresentException(UserPresentException ex) {
+        return new ApiError(ex.getLocalizedMessage());
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public ApiError handleAllExceptions(Exception ex) {
+        return new ApiError("Error on server, please contact the developer team" + ex.getLocalizedMessage());
     }
 
 }

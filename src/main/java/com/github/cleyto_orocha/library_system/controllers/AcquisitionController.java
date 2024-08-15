@@ -42,7 +42,8 @@ public class AcquisitionController {
         return ResponseEntity.ok().body(acquisitionService.findAll());
     }
 
-    @Operation(summary = "Make a product acquisition ")
+    @Operation(summary = "Make a product acquisition", 
+    description = "Before registering an acquisition, make sure the components are registered")
     @PostMapping
     public ResponseEntity<AcquisitionDTO> include(@RequestBody @Valid AcquisitionDTO acquisitionDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(acquisitionService.include(acquisitionDTO));

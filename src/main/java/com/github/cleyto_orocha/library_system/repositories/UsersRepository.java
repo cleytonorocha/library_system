@@ -9,5 +9,5 @@ import com.github.cleyto_orocha.library_system.entities.Users;
 
 public interface UsersRepository extends JpaRepository<Users, Long> {
     Optional<UserDetails> findByLogin(String login);
-    Boolean existsByLogin(String login);
+    boolean existsByLogin(String login);
 }
