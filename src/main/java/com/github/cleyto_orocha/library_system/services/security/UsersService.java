@@ -44,8 +44,6 @@ public class UsersService {
 
     @Operation(summary = "Register a user and return a token")
     public ResponseEntity<LoginResponseDTO> register(RegisterDTO registerDTO) {
-        if (usersRepository.existsByLogin(registerDTO.login()))
-            return ResponseEntity.badRequest().build();
         String password = new BCryptPasswordEncoder().encode(registerDTO.password());
         Users user = Users.builder()
                 .login(registerDTO.login())
