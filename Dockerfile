@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17
+FROM eclipse-temurin:21
 WORKDIR /app
 COPY target/library_system-1.0.0.jar library_system.jar
 EXPOSE 8080
