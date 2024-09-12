@@ -14,6 +14,7 @@ import com.github.cleyto_orocha.library_system.controllers.dto.RegisterDTO;
 import com.github.cleyto_orocha.library_system.controllers.security.AccountCredentialsVO;
 import com.github.cleyto_orocha.library_system.controllers.security.LoginResponseDTO;
 import com.github.cleyto_orocha.library_system.entities.Users;
+import com.github.cleyto_orocha.library_system.exception.UserPresentException;
 import com.github.cleyto_orocha.library_system.repositories.UsersRepository;
 import com.github.cleyto_orocha.library_system.security.JwtService;
 
@@ -44,6 +45,9 @@ public class UsersService {
 
     @Operation(summary = "Register a user and return a token")
     public ResponseEntity<LoginResponseDTO> register(RegisterDTO registerDTO) {
+        if(usersRepository.existsByLogin(registerDTO.login())){
+            throw new UserPresentException();
+        }
         String password = new BCryptPasswordEncoder().encode(registerDTO.password());
         Users user = Users.builder()
                 .login(registerDTO.login())

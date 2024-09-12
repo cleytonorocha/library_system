@@ -21,7 +21,6 @@ public class LibrarySystemApplication {
 
 	@Bean
 	public LocaleResolver localeResolver() {
-		// Definir o Locale fixo para inglês
 		return new FixedLocaleResolver(Locale.ENGLISH);
 	}
 
